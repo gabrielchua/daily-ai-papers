@@ -9,24 +9,60 @@ jobs:
   update-papers:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run paper pull and summarization
-      env:
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: |
-        python scripts/pull_hf_daily.py
-        python scripts/summarize_papers.py
-    - name: Commit and push if changed
-      run: |
-        git config --global user.email "github-actions@github.com"
-        git config --global user.name "github-actions"
-        git add -A
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Update daily papers $(date +'%Y-%m-%d')" && git push)
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run paper pull
+        run: |
+          python scripts/pull_hf_daily.py
+
+      - name: Upload PDFs and JSON as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: paper-data
+          path: |
+            temp_pdfs
+            data/*.json
+
+  summarize-papers:
+    needs: update-papers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Download PDFs and JSON
+        uses: actions/download-artifact@v3
+        with:
+          name: paper-data
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run paper summarization
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/summarize_papers.py
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update daily papers $(date +'%Y-%m-%d')" && git push)
