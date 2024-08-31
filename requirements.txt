@@ -1,0 +1,4 @@
+requests
+beautifulsoup4
+google-generativeai
+Pillow
