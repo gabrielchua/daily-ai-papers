@@ -1,4 +1,4 @@
-requests
-beautifulsoup4
-google-generativeai
-Pillow
+requests==2.32.3
+beautifulsoup4==4.12.3
+google-generativeai==0.7.2
+Pillow==10.4.0
