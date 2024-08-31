@@ -83,7 +83,6 @@ def main() -> None:
     for paper in papers:
         if os.path.exists(paper['pdf_path']):
             os.remove(paper['pdf_path'])
-    os.rmdir('temp_pdfs')
 
 if __name__ == "__main__":
     main()

@@ -48,7 +48,7 @@ def pull_hf_daily() -> None:
 
     papers: List[Dict[str, str]] = []
     temp_pdf_dir = "temp_pdfs"
-    os.makedirs(temp_pdf_dir, exist_ok=True)
+    os.makedirs(temp_pdf_dir, exist_ok=True)  # Create temp_pdfs directory if it doesn't exist
 
     for paper in soup.find_all('article', class_='paper-card'):
         title = paper.find('h3').text.strip()
@@ -75,8 +75,12 @@ def pull_hf_daily() -> None:
 
     date = datetime.now().strftime("%Y-%m-%d")
     data_dir = 'data'
+    print(f"Ensuring data directory exists: {data_dir}")
     os.makedirs(data_dir, exist_ok=True)  # Create 'data' directory if it doesn't exist
-    with open(os.path.join(data_dir, f'{date}_papers.json'), 'w') as f:
+    data_file_path = os.path.join(data_dir, f'{date}_papers.json')
+    
+    print(f"Writing data to {data_file_path}")
+    with open(data_file_path, 'w') as f:
         json.dump(papers, f, indent=2)
 
     print(f"Saved {len(papers)} papers' information and PDFs")
