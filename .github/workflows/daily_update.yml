@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * *'  # Run daily at midnight UTC
   workflow_dispatch:  # Allow manual triggering
 
+permissions:
+  contents: write
+
 jobs:
   update-papers:
     runs-on: ubuntu-latest
@@ -64,5 +67,6 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.repository }}.git
           git add -A
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update daily papers $(date +'%Y-%m-%d')" && git push)
