@@ -70,7 +70,7 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
     front_content = existing_content.split("## Papers for")[0]
     existing_content = existing_content.replace(front_content, "")
 
-    updated_content = f"# Daily AI Papers \n\nThis summary is automated the summary of HuggingFace's daily papers, using Gemini and GitHub actions.\n\nLast updated: {date_str}\n\n" + new_content + existing_content
+    updated_content = f"# Daily AI Papers \n\nThis summary is automated the summary of [HuggingFace's Daily Papers](https://huggingface.co/papers), using Gemini and GitHub actions.\n\nLast updated: {date_str}\n\n" + new_content + existing_content
      
     with open('README.md', 'w') as f:
         f.write(updated_content)
