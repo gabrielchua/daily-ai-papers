@@ -74,8 +74,9 @@ def pull_hf_daily() -> None:
             print(f"Could not extract arXiv ID from link: {link}")
 
     date = datetime.now().strftime("%Y-%m-%d")
-    os.makedirs('data', exist_ok=True)
-    with open(f'data/{date}_papers.json', 'w') as f:
+    data_dir = 'data'
+    os.makedirs(data_dir, exist_ok=True)  # Create 'data' directory if it doesn't exist
+    with open(os.path.join(data_dir, f'{date}_papers.json'), 'w') as f:
         json.dump(papers, f, indent=2)
 
     print(f"Saved {len(papers)} papers' information and PDFs")
