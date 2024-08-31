@@ -59,13 +59,18 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
     new_content += "| Title | Authors | Summary | Link |\n"
     new_content += "|-------|---------|---------|------|\n"
     for summary in summaries:
+        # Replace line breaks with spaces
+        summary['summary'] = summary['summary'].replace('\n', ' ')
         new_content += f"| {summary['title']} | {summary['authors']} | {summary['summary']} | [Read more]({summary['link']}) |\n"
 
     with open('README.md', 'r') as f:
         existing_content = f.read()
 
-    updated_content = f"# Daily Arxiv Paper Summaries\n\nThis summary is automated by GitHub actions, Gemini, and acknowledges the contributions by HuggingFace in curating this list.\n\nLast updated: {date_str}\n\n" + new_content + existing_content
+    # Remove the existing header
+    existing_content = existing_content.split("## Papers for")[1:1]
 
+    updated_content = f"# Daily AI Papers \n\nThis summary is automated the summary of HuggingFace's daily papers, using Gemini and GitHub actions.\n\nLast updated: {date_str}\n\n" + new_content + existing_content
+     
     with open('README.md', 'w') as f:
         f.write(updated_content)
 
