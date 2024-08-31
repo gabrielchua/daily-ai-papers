@@ -29,9 +29,14 @@ def summarize_paper(title: str, authors: str, pdf_path: str) -> str:
     Returns:
         str: The summary of the paper.
     """
-    pdf_image = PIL.Image.open(pdf_path)
+
+    # Upload the PDF to Gemini
+    pdf_file = genai.upload_file(path=pdf_path, display_name=f"paper_{title}")
+
     prompt = f"""
-    Summarize the given AI research paper in 4-5 sentences.
+    Read the AI research paper carefully and summarise it in 4-5 sentences. Be terse and include the key details.
+
+    Be formal and academic in your tone.
 
     Highlight the key results, and how it may be relevant to practitioners (e.g., AI Engineers, Data Scientists, etc).
     
@@ -39,7 +44,7 @@ def summarize_paper(title: str, authors: str, pdf_path: str) -> str:
     Title: {title}
     Authors: {authors}
     """
-    response = model.generate_content([prompt, pdf_image])
+    response = model.generate_content([pdf_file, prompt])
     return response.text
 
 def update_readme(summaries: List[Dict[str, str]]) -> None:
