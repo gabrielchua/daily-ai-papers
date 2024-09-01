@@ -2,7 +2,7 @@
 
 This summary is automated the summary of [HuggingFace's Daily Papers](https://huggingface.co/papers), using Gemini and GitHub actions.
 
-Last updated: 2024-09-01
+Last updated: 2024-08-30
 
 ## Papers for 2024-08-30
 
