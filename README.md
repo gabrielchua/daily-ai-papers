@@ -2,8 +2,14 @@
 
 This summary is automated the summary of [HuggingFace's Daily Papers](https://huggingface.co/papers), using Gemini and GitHub actions.
 
-Last updated: 2024-09-02
+Last updated: 2024-09-03
 
+## Papers for 2024-09-03
+
+| Title | Authors | Summary | Link |
+|-------|---------|---------|------|
+| VisionTS: Visual Masked Autoencoders Are Free-Lunch Zero-Shot Time Series Forecasters | Xiaoyun Joy Wang, Zhuo Li, twinsken, HALF111, chenmouxiang | This paper introduces VisionTS, a novel zero-shot time series forecasting model that leverages the intrinsic similarities between images and time series.  The authors reformulate the forecasting task as an image reconstruction problem,  and utilize a pre-trained visual masked autoencoder (MAE) to forecast future time series values without any specific training on time series data. VisionTS achieves comparable or even superior performance to existing text-based and time-series based foundation models in the zero-shot setting, suggesting that visual models could be a free lunch for time series forecasting.  This work provides a novel approach for practitioners to build time series forecasting foundation models, particularly in situations where data scarcity or heterogeneity is a challenge. | [Read more](https://arxiv.org/abs/2408.17253) |
+| Mini-Omni: Language Models Can Hear, Talk While Thinking in Streaming | Zhifei Xie, gpt-omni | The paper proposes *Mini-Omni*, an open-source, end-to-end multi-modal large language model (LLM) with real-time speech interaction capabilities. Mini-Omni enables direct audio reasoning via text-instructed speech generation, which utilizes a novel parallel decoding strategy to boost inference speed. The authors introduce the "Any Model Can Talk" framework, which helps to transfer text capabilities of pre-trained models to speech output with minimal degradation, making it valuable for practitioners in the field. They also introduce the VoiceAssistant-400K dataset, specifically designed for speech-output models. Mini-Omni is a significant advancement in human-computer interaction, offering valuable potential for future research.   | [Read more](https://arxiv.org/abs/2408.16725) |
 ## Papers for 2024-09-02
 
 | Title | Authors | Summary | Link |
