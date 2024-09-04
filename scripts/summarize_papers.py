@@ -85,8 +85,11 @@ def main() -> None:
 
     summaries = []
     for paper in papers:
-        summary = summarize_paper(paper['title'], paper['authors'], paper['pdf_path'])
-        summaries.append({**paper, 'summary': summary})
+        try:
+            summary = summarize_paper(paper['title'], paper['authors'], paper['pdf_path'])
+            summaries.append({**paper, 'summary': summary})
+        except:
+            pass # Skip papers that fail to summarize
 
     update_readme(summaries)
 
