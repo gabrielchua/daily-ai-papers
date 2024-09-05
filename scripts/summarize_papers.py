@@ -10,7 +10,6 @@ import os
 from datetime import datetime
 from typing import List, Dict
 import google.generativeai as genai
-import pikepdf
 
 # Configure the Gemini API
 genai.configure(api_key=os.environ['GEMINI_API_KEY'])
