@@ -16,6 +16,7 @@ from typing import List, Dict
 import requests
 from bs4 import BeautifulSoup
 
+HF_URL = "https://huggingface.co/papers"
 
 def download_pdf(arxiv_id: str, save_path: str) -> bool:
     """
@@ -42,8 +43,7 @@ def pull_hf_daily() -> None:
     Pulls the daily papers from Hugging Face's papers page, downloads their PDFs,
     and saves their information in a JSON file.
     """
-    url = "https://huggingface.co/papers"
-    response = requests.get(url)
+    response = requests.get(HF_URL)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     papers: List[Dict[str, str]] = []
