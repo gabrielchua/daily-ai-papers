@@ -109,25 +109,25 @@ def main() -> None:
     for paper in papers:
         try:
             summary = summarize_paper(
-                paper["title"],
-                paper["authors"],
-                paper["pdf_path"],
-                model="gemini-1.5-pro"
+                title=  paper["title"],
+                authors=paper["authors"],
+                pdf_path=paper["pdf_path"],
+                model_name="gemini-1.5-pro"
             )
             summaries.append({**paper, "summary": summary})
             time.sleep(60) # Sleep for 1 minute to avoid rate limiting
-        except Exception as e:
+        except Exception:
             try:
                 print(f"Failed to summarize paper {paper['title']}. Trying with a different model.")
                 summary = summarize_paper(
-                    paper["title"],
-                    paper["authors"],
-                    paper["pdf_path"],
-                    model="gemini-1.5-flash"
+                    title=paper["title"],
+                    authors=paper["authors"],
+                    pdf_path=paper["pdf_path"],
+                    model_name="gemini-1.5-flash"
                 )
                 summaries.append({**paper, "summary": summary})
             except Exception as e:
-                print(f"Failed to summarize paper {paper['title']} with both models.")
+                print(f"Failed to summarize paper {paper['title']} with both models. Due to {e}")
                 continue
 
     update_readme(summaries)
