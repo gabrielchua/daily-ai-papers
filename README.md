@@ -1,9 +1,11 @@
-# Daily AI Papers 
+# Daily AI Papers
 
 This summary is automated the summary of [HuggingFace's Daily Papers](https://huggingface.co/papers), using Gemini and GitHub actions.
 
-Last updated: 2024-09-04
+Last updated: 2024-09-05## Papers for 2024-09-05
 
+| Title | Authors | Summary | Link |
+|-------|---------|---------|------|
 ## Papers for 2024-09-04
 
 | Title | Authors | Summary | Link |
