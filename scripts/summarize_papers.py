@@ -5,19 +5,20 @@ This script summarizes the daily papers pulled from Hugging Face's papers page,
 updates the README with the summaries, and cleans up temporary files.
 """
 
+# Standard library imports
 import json
 import os
+import time
 from datetime import datetime
 from typing import List, Dict
+
+# Third party imports
 import google.generativeai as genai
 
 # Configure the Gemini API
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
-model = genai.GenerativeModel(model_name="gemini-1.5-flash")
-
-
-def summarize_paper(title: str, authors: str, pdf_path: str) -> str:
+def summarize_paper(title: str, authors: str, pdf_path: str, model_name: str) -> str:
     """
     Summarizes a research paper using the Gemini API.
 
@@ -30,16 +31,19 @@ def summarize_paper(title: str, authors: str, pdf_path: str) -> str:
     - str: The summary of the paper.
     """
 
+    model = genai.GenerativeModel(model_name=model_name)
+
     # Upload the PDF to Gemini
     pdf_file = genai.upload_file(path=pdf_path, display_name=f"paper_{title}")
 
     # Load the prompt template
-    with open("templates/prompt_summarize.md", "r") as f:
+    with open("templates/prompt_template.md", "r") as f:
         prompt_template = f.read()
 
     prompt = prompt_template.replace("{title}", title).replace("{authors}", authors)
 
     response = model.generate_content([pdf_file, prompt])
+
     return response.text
 
 
@@ -79,7 +83,7 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
         intro_content = f.read()
 
     # Add the date to the intro
-    intro_content = intro_content.replace("{DATE}", date_str)
+    intro_content = intro_content.replace("{DATE}", f"{date_str} \n \n")
 
     # Remove the existing header
     front_content = existing_content.split("## Papers for")[0]
@@ -105,11 +109,26 @@ def main() -> None:
     for paper in papers:
         try:
             summary = summarize_paper(
-                paper["title"], paper["authors"], paper["pdf_path"]
+                paper["title"],
+                paper["authors"],
+                paper["pdf_path"],
+                model="gemini-1.5-pro"
             )
             summaries.append({**paper, "summary": summary})
-        except:
-            pass  # Skip papers that fail to summarize
+            time.sleep(60) # Sleep for 1 minute to avoid rate limiting
+        except Exception as e:
+            try:
+                print(f"Failed to summarize paper {paper['title']}. Trying with a different model.")
+                summary = summarize_paper(
+                    paper["title"],
+                    paper["authors"],
+                    paper["pdf_path"],
+                    model="gemini-1.5-flash"
+                )
+                summaries.append({**paper, "summary": summary})
+            except Exception as e:
+                print(f"Failed to summarize paper {paper['title']} with both models.")
+                continue
 
     update_readme(summaries)
 
