@@ -16,7 +16,7 @@ from typing import List, Dict
 import google.generativeai as genai
 
 # Configure the Gemini API
-genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 def summarize_paper(title: str, authors: str, pdf_path: str, model_name: str) -> str:
     """
