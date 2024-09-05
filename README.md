@@ -8,6 +8,10 @@ Last updated: 2024-09-05
 
 | Title | Authors | Summary | Link |
 |-------|---------|---------|------|
+## Papers for 2024-09-05
+
+| Title | Authors | Summary | Link |
+|-------|---------|---------|------|
 ## Papers for 2024-09-04
 
 | Title | Authors | Summary | Link |
