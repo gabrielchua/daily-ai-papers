@@ -55,7 +55,7 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
     - summaries (List[Dict[str, str]]): A list of dictionaries containing paper information and summaries.
     """
     date_str = datetime.now().strftime("%Y-%m-%d")
-    new_content = f"## Papers for {date_str}\n\n"
+    new_content = f"\n\n## Papers for {date_str}\n\n"
     new_content += "| Title | Authors | Summary | Link |\n"
     new_content += "|-------|---------|---------|------|\n"
     for summary in summaries:
