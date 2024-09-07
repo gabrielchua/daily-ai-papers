@@ -1,6 +1,6 @@
 # Daily AI Papers
 
-These summaries are automatically generated from [HuggingFace's Daily Papers](https://huggingface.co/papers), using Gemini and GitHub actions.
+These summaries are automatically generated from [HuggingFace's Daily Papers](https://huggingface.co/papers), using Gemini and GitHub actions.  All credits go to the research community for sharing and the HuggingFace community for curating these papers.
 
 Please note:
 - Authors may be listed by their HuggingFace user id. This will be rectified soon. 
