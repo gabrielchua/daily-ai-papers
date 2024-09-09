@@ -62,7 +62,7 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
         # Replace line breaks with spaces
         summary["summary"] = summary["summary"].replace("\n", " ")
         hf_link = summary['link'].replace("https://arxiv.org/abs/", "https://huggingface.co/papers/")
-        new_content += f"| {summary['title']} - read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}) | {summary['authors']} | {summary['summary']} |\n"
+        new_content += f"| {summary['title']} (read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}))| {summary['authors']} | {summary['summary']} |\n"
 
     day = date_str.split("-")[2]
 
@@ -91,7 +91,7 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
     existing_content = existing_content.replace(front_content, "")
 
     # Combine the intro, new content, and existing content
-    updated_content = intro_content + new_content + existing_content
+    updated_content = intro_content + new_content + "\n\n" +  existing_content
 
     # Write the updated content to the README
     with open("README.md", "w") as f:
