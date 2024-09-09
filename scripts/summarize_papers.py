@@ -62,7 +62,7 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
         # Replace line breaks with spaces
         summary["summary"] = summary["summary"].replace("\n", " ")
         hf_link = summary['link'].replace("https://arxiv.org/abs/", "https://huggingface.co/papers/")
-        new_content += f"| {summary['title']} (read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}))| {summary['authors']} | {summary['summary']} |\n"
+        new_content += f"| {summary['title']} (Read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}))| {summary['authors']} | {summary['summary']} |\n"
 
     day = date_str.split("-")[2]
 
