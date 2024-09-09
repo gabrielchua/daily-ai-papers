@@ -56,13 +56,13 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
     """
     date_str = datetime.now().strftime("%Y-%m-%d")
     new_content = f"\n\n## Papers for {date_str}\n\n"
-    new_content += "| Title | Authors | Summary | Link |\n"
-    new_content += "|-------|---------|---------|------|\n"
+    new_content += "| Title | Authors | Summary |\n"
+    new_content += "|-------|---------|---------|\n"
     for summary in summaries:
         # Replace line breaks with spaces
         summary["summary"] = summary["summary"].replace("\n", " ")
         hf_link = summary['link'].replace("https://arxiv.org/abs/", "https://huggingface.co/papers/")
-        new_content += f"| {summary['title']} | {summary['authors']} | {summary['summary']} | Read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}) |\n"
+        new_content += f"| {summary['title']} - read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}) | {summary['authors']} | {summary['summary']} |\n"
 
     day = date_str.split("-")[2]
 
