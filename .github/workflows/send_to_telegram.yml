@@ -5,6 +5,7 @@ on:
   schedule:
     - cron: '0 */6 * * 1-5'  # Every 6 hours on weekdays
     - cron: '0 */3 * * 0,6'  # Every 3 hours on weekends
+  workflow_dispatch:
 
 jobs:
   send-to-telegram:
