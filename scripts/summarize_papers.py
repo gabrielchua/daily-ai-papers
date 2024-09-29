@@ -84,7 +84,8 @@ def update_readme(summaries: List[Dict[str, str]]) -> None:
         intro_content = f.read()
 
     # Add the date to the intro
-    intro_content = intro_content.replace("{DATE}", f"{date_str} \n \n")
+    date_str_readme = date_str.replace("-", "--")
+    intro_content = intro_content.replace("{DATE}", f"{date_str_readme} \n \n")
 
     # Remove the existing header
     front_content = existing_content.split("## Papers for")[0]
