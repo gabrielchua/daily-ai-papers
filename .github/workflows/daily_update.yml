@@ -70,3 +70,8 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add -A
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update daily papers $(date +'%Y-%m-%d')" && git push)
+
+  send-to-telegram:
+    needs: summarize-papers
+    uses: ./.github/workflows/send_to_telegram.yml
+    secrets: inherit

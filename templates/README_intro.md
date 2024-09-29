@@ -1,6 +1,12 @@
 # Daily AI Papers
 
+[![Website](https://img.shields.io/badge/Website-Visit%20Daily%20AI%20Papers-blue?style=flat-square&logo=github)](https://gabrielchua.me/daily-ai-papers/)
+[![Telegram](https://img.shields.io/badge/Telegram-Join%20Channel-blue?style=flat-square&logo=telegram)](https://t.me/daily_ai_papers)
+![Daily Update](https://github.com/gabrielchua/daily-ai-papers/actions/workflows/daily_update.yml/badge.svg)
+
 These summaries are automatically generated from [HuggingFace's Daily Papers](https://huggingface.co/papers), using Gemini and GitHub actions.  All credits go to the research community for sharing and the HuggingFace community for curating these papers.
+
+🔉 Audio summaries are generated using OpenAI's text-to-speech API, and available on the [Telegram Channel](https://t.me/daily_ai_papers).
 
 <img src="https://raw.githubusercontent.com/gabrielchua/daily-ai-papers/main/_includes/icon.png" width="200">
 
