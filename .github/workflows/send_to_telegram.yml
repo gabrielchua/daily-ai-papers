@@ -2,9 +2,6 @@ name: Send to Telegram
 
 on:
   workflow_call:
-  schedule:
-    - cron: '0 */6 * * 1-5'  # Every 6 hours on weekdays
-    - cron: '0 */3 * * 0,6'  # Every 3 hours on weekends
   workflow_dispatch:
 
 jobs:
@@ -24,17 +21,6 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run send_to_telegram script
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          python scripts/send_to_telegram.py
-
-      - name: Wait for 5 minutes
-        run: sleep 300
-
-      - name: Run send_to_telegram script again
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
