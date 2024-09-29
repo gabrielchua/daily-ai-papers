@@ -31,8 +31,8 @@ jobs:
         run: |
           python scripts/send_to_telegram.py
 
-      - name: Wait for 30 minutes
-        run: sleep 1800
+      - name: Wait for 5 minutes
+        run: sleep 300
 
       - name: Run send_to_telegram script again
         env:
