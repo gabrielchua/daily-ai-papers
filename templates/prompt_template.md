@@ -1,4 +1,4 @@
-Summarize the AI research paper in 4-5 concise sentences, adhering STRICLY to the following guidelines:
+Summarize the AI research paper in 4-5 concise sentences, adhering STRICTLY to the following guidelines:
 
 1. Focus solely on factual information presented in the paper. Do not infer, extrapolate, or add any information not explicitly stated.
 
