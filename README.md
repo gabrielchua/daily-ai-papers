@@ -3,7 +3,7 @@
 <table style="border: none; border-collapse: collapse;">
 <tr style="border: none;">
 <td style="border: none;">
-<img src="https://img.shields.io/badge/Last%20Updated-2025--01--01 
+<img src="https://img.shields.io/badge/Last%20Updated-2025--01--02 
  
 -brightgreen" alt="Last Updated"> <a href="https://t.me/daily_ai_papers"><img src="https://img.shields.io/badge/Telegram-Join%20Channel-blue?style=flat-square&logo=telegram" alt="Telegram"></a> <a href="https://gabrielchua.me/daily-ai-papers/"><img src="https://img.shields.io/badge/Website-Visit%20Daily%20AI%20Papers-blue?style=flat-square&logo=github" alt="Website"></a> <br><br>
 Summaries auto-generated from <a href="https://huggingface.co/papers">HuggingFace's Daily Papers</a> using Gemini and GitHub Actions. All credits go to the research and HuggingFace communities.<br><br>
@@ -15,6 +15,14 @@ Note: Authors may be listed by their HuggingFace IDs. Additionally, summaries ar
 </td>
 </tr>
 </table>
+
+
+## Papers for 2025-01-02
+
+| Title | Authors | Summary |
+|-------|---------|---------|
+| OS-Genesis: Automating GUI Agent Trajectory Construction via Reverse Task Synthesis (Read more on [arXiv](https://arxiv.org/abs/2412.19723) or [HuggingFace](https://huggingface.co/papers/2412.19723))| Yian Wang, Chuanyang Jin, Kanzhi Cheng, heroding77, QiushiSun | OS-Genesis is a novel pipeline that automates the generation of high-quality trajectory data for training GUI agents without human supervision or predefined tasks. The main research question is how to automatically construct diverse and high-quality GUI agent trajectories to improve their performance on complex computer tasks. The key methodology is a reverse task synthesis process involving interaction-driven exploration of GUI environments to collect state-action triplets, followed by the generation of low-level and high-level instructions using an annotation model and a trajectory reward model to ensure data quality. The primary result is that agents trained with OS-Genesis showed significant performance improvements on online benchmarks, such as achieving a 17.41% success rate on AndroidWorld compared to 9.82% for the self-instruction baseline. The principal implication for AI practitioners is that OS-Genesis provides an effective method for generating high-quality training data for GUI agents, which can significantly improve their ability to automate complex real-world computer tasks, particularly in dynamic environments.  |
+| Xmodel-2 Technical Report (Read more on [arXiv](https://arxiv.org/abs/2412.19638) or [HuggingFace](https://huggingface.co/papers/2412.19638))| Jiang Ling, Qu Zhijiu, Lin Qingquan, Liu Yang, valeriaWong | Xmodel-2 is a 1.2 billion-parameter language model designed for reasoning tasks, emphasizing efficiency and performance. The main research question is how to optimize a language model for complex reasoning while maintaining low training costs and efficiency. The key methodology involves using the Warmup-Stable-Decay (WSD) learning rate scheduler, optimizing data ratios during the decay phase of training, and employing an architecture that allows different model scales to share a unified set of hyperparameters. The primary results show that Xmodel-2 achieves state-of-the-art performance among 1B-parameter models in complex reasoning tasks, with an average score of 39.62 on complex reasoning benchmarks (GSM8K, MATH, BBH, MMLU, HumanEval, and MBPP). The principal implication for AI practitioners is that Xmodel-2 provides a strong, efficient model for reasoning tasks, demonstrating the effectiveness of the WSD learning rate scheduler and data ratio optimization in enhancing model performance.  |
 
 
 ## Papers for 2025-01-01
