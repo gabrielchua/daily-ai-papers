@@ -3,7 +3,7 @@
 <table style="border: none; border-collapse: collapse;">
 <tr style="border: none;">
 <td style="border: none;">
-<img src="https://img.shields.io/badge/Last%20Updated-2025--01--20 
+<img src="https://img.shields.io/badge/Last%20Updated-2025--01--21 
  
 -brightgreen" alt="Last Updated"> <a href="https://t.me/daily_ai_papers"><img src="https://img.shields.io/badge/Telegram-Join%20Channel-blue?style=flat-square&logo=telegram" alt="Telegram"></a> <a href="https://gabrielchua.me/daily-ai-papers/"><img src="https://img.shields.io/badge/Website-Visit%20Daily%20AI%20Papers-blue?style=flat-square&logo=github" alt="Website"></a> <br><br>
 Summaries auto-generated from <a href="https://huggingface.co/papers">HuggingFace's Daily Papers</a> using Gemini and GitHub Actions. All credits go to the research and HuggingFace communities.<br><br>
@@ -15,6 +15,14 @@ Note: Authors may be listed by their HuggingFace IDs. Additionally, summaries ar
 </td>
 </tr>
 </table>
+
+
+## Papers for 2025-01-21
+
+| Title | Authors | Summary |
+|-------|---------|---------|
+| GameFactory: Creating New Games with Generative Interactive Videos (Read more on [arXiv](https://arxiv.org/abs/2501.08325) or [HuggingFace](https://huggingface.co/papers/2501.08325))| Yiran Qin, XihuiLiu, di-zhang-fdu, Xintao, VictorYuki | GameFactory is a framework for generating new, open-domain game videos with action controllability using pre-trained video diffusion models. The main research objective is to achieve scene generalization in game video generation, enabling the creation of entirely new game environments beyond existing game styles. The key methodology involves a multi-phase training strategy that decouples game style learning from action control, utilizing a new action-annotated dataset (GF-Minecraft) derived from Minecraft. Primary results show that the model can generate diverse, action-controllable game videos in open domains, with a Flow-MSE of 54.13 for open-domain video generation using multi-phase training. The principal implication for AI practitioners is that this framework enables the development of generative game engines capable of creating new games with diverse scenes, leveraging pre-trained video models and a relatively small amount of action-annotated game data.  |
+| VideoWorld: Exploring Knowledge Learning from Unlabeled Videos (Read more on [arXiv](https://arxiv.org/abs/2501.09781) or [HuggingFace](https://huggingface.co/papers/2501.09781))| Bingyi Kang, Yao Zhao, Xun Guo, Yunchao Wei, maverickrzw | VideoWorld is an autoregressive video generation model that learns complex knowledge from unlabeled video data. The main research question is whether a deep generative model can learn complex knowledge, including rules, reasoning, and planning, solely from visual input. The key methodology involves training a transformer-based model on unlabeled videos of Go games and robotic manipulation tasks, using a Latent Dynamics Model (LDM) to represent visual changes compactly. The primary results show that VideoWorld achieves a 5-dan professional level in Go with a 300-million-parameter model and generalizes across environments in robotic control tasks, achieving 88.1 action accuracy. The principal implication for AI practitioners is that training video generation models on unlabeled visual data can be a viable approach for acquiring complex knowledge and control policies, demonstrating strong performance and generalization capabilities without relying on text-based training or reward mechanisms.  |
 
 
 ## Papers for 2025-01-20
