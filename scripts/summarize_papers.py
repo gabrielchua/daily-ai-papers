@@ -14,13 +14,14 @@ from typing import List, Dict
 
 # Third party imports
 import google.generativeai as genai
+from logger import logger
 
 # Configure the Gemini API
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-def summarize_paper(title: str, authors: str, pdf_path: str, model_name: str) -> str:
+def summarize_paper(title: str, authors: str, pdf_path: str, model_name: str) -> tuple[str, str]:
     """
-    Summarizes a research paper using the Gemini API.
+    Summarizes a research paper and determines its category using the Gemini API.
 
     Args:
     - title (str): The title of the paper.
@@ -28,7 +29,7 @@ def summarize_paper(title: str, authors: str, pdf_path: str, model_name: str) ->
     - pdf_path (str): The path to the PDF of the paper.
 
     Returns:
-    - str: The summary of the paper.
+    - tuple[str, str]: The summary and category of the paper.
     """
 
     model = genai.GenerativeModel(model_name=model_name)
@@ -43,26 +44,36 @@ def summarize_paper(title: str, authors: str, pdf_path: str, model_name: str) ->
     prompt = prompt_template.replace("{title}", title).replace("{authors}", authors)
 
     response = model.generate_content([pdf_file, prompt])
+    response_text = response.text
+    
+    logger.info(f"Response received: {response_text}")
 
-    return response.text
+    # Remove markdown json formatting if response is in markdown code block format
+    if response_text.startswith("```json"):
+        logger.warning("Response contains markdown json code format - removing formatting")
+        response_text = response_text.replace("```json", "").replace("```", "")
+    
+    response_data = json.loads(response_text)
+
+    return response_data["summary"], response_data["category"]
 
 
 def update_readme(summaries: List[Dict[str, str]]) -> None:
     """
-    Updates the README file with the summaries of the papers.
+    Updates the README file with the summaries and categories of the papers.
 
     Args:
     - summaries (List[Dict[str, str]]): A list of dictionaries containing paper information and summaries.
     """
     date_str = datetime.now().strftime("%Y-%m-%d")
     new_content = f"\n\n## Papers for {date_str}\n\n"
-    new_content += "| Title | Authors | Summary |\n"
-    new_content += "|-------|---------|---------|\n"
+    new_content += "| Category | Title | Authors | Summary |\n"
+    new_content += "|----------|-------|---------|---------|\n"
     for summary in summaries:
         # Replace line breaks with spaces
         summary["summary"] = summary["summary"].replace("\n", " ")
         hf_link = summary['link'].replace("https://arxiv.org/abs/", "https://huggingface.co/papers/")
-        new_content += f"| {summary['title']} (Read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}))| {summary['authors']} | {summary['summary']} |\n"
+        new_content += f"| {summary['category']} | {summary['title']} (Read more on [arXiv]({summary['link']}) or [HuggingFace]({hf_link}))| {summary['authors']} | {summary['summary']} |\n"
 
     day = date_str.split("-")[2]
 
@@ -108,28 +119,30 @@ def main() -> None:
         papers = json.load(f)
 
     summaries = []
-    for paper in papers:
+    for i, paper in enumerate(papers):
         try:
-            summary = summarize_paper(
-                title=  paper["title"],
+            if i != 0:
+                time.sleep(60) # Sleep for 1 minute to avoid rate limiting
+
+            summary, category = summarize_paper(
+                title=paper["title"],
                 authors=paper["authors"],
                 pdf_path=paper["pdf_path"],
                 model_name="gemini-2.0-pro-exp-02-05"
             )
-            summaries.append({**paper, "summary": summary})
-            time.sleep(60) # Sleep for 1 minute to avoid rate limiting
+            summaries.append({**paper, "summary": summary, "category": category})
         except Exception:
             try:
-                print(f"Failed to summarize paper {paper['title']}. Trying with a different model.")
-                summary = summarize_paper(
+                logger.warning(f"Failed to summarize paper {paper['title']}. Trying with a different model.")
+                summary, category = summarize_paper(
                     title=paper["title"],
                     authors=paper["authors"],
                     pdf_path=paper["pdf_path"],
                     model_name="gemini-2.0-flash-001"
                 )
-                summaries.append({**paper, "summary": summary})
+                summaries.append({**paper, "summary": summary, "category": category})
             except Exception as e:
-                print(f"Failed to summarize paper {paper['title']} with both models. Due to {e}")
+                logger.error(f"Failed to summarize paper {paper['title']} with both models. Due to {e}")
                 continue
 
     update_readme(summaries)
