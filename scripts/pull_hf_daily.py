@@ -16,6 +16,8 @@ from typing import List, Dict
 import requests
 from bs4 import BeautifulSoup
 
+from logger import logger
+
 HF_URL = "https://huggingface.co/papers"
 
 
@@ -61,7 +63,7 @@ def pull_hf_daily() -> None:
         if title_tag:
             title = title_tag.text.strip()
         else:
-            print("Title not found for a paper")
+            logger.info("Title not found for a paper")
             continue
 
         # Extract the paper ID from the link
@@ -70,12 +72,12 @@ def pull_hf_daily() -> None:
         if arxiv_id_match:
             arxiv_id = arxiv_id_match.group(1)
         else:
-            print(f"Could not extract arXiv ID from link: {link}")
+            logger.info(f"Could not extract arXiv ID from link: {link}")
             continue
 
         # Check for duplicates using arXiv ID
         if arxiv_id in seen_ids:
-            print(f"Duplicate paper detected with ID {arxiv_id}, skipping.")
+            logger.info(f"Duplicate paper detected with ID {arxiv_id}, skipping.")
             continue
         seen_ids.add(arxiv_id)  # Add ID to set of seen IDs
 
@@ -101,18 +103,18 @@ def pull_hf_daily() -> None:
                 }
             )
         else:
-            print(f"Failed to download PDF for {arxiv_id}")
+            logger.info(f"Failed to download PDF for {arxiv_id}")
 
     date = datetime.now().strftime("%Y-%m-%d")
     data_dir = "data"
-    print(f"Ensuring data directory exists: {data_dir}")
+    logger.info(f"Ensuring data directory exists: {data_dir}")
     os.makedirs(data_dir, exist_ok=True)  # Create 'data' directory if it doesn't exist
     data_file_path = os.path.join(data_dir, f"{date}_papers.json")
 
-    print(f"Writing data to {data_file_path}")
+    logger.info(f"Writing data to {data_file_path}")
     with open(data_file_path, "w") as f:
         json.dump(papers, f, indent=2)
-    print(f"Saved {len(papers)} papers' information and PDFs")
+    logger.info(f"Saved {len(papers)} papers' information and PDFs")
 
 
 if __name__ == "__main__":
