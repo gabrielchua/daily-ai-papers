@@ -114,7 +114,7 @@ def main() -> None:
                 title=  paper["title"],
                 authors=paper["authors"],
                 pdf_path=paper["pdf_path"],
-                model_name="gemini-2.0-pro-exp-02-05"
+                model_name="gemini-2.5-pro"
             )
             summaries.append({**paper, "summary": summary})
             time.sleep(60) # Sleep for 1 minute to avoid rate limiting
@@ -125,7 +125,7 @@ def main() -> None:
                     title=paper["title"],
                     authors=paper["authors"],
                     pdf_path=paper["pdf_path"],
-                    model_name="gemini-2.0-flash-001"
+                    model_name="gemini-2.5-flash"
                 )
                 summaries.append({**paper, "summary": summary})
             except Exception as e:
