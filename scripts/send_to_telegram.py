@@ -19,11 +19,7 @@ from telegram import Bot
 from telegram.constants import ParseMode
 from telegram.error import TelegramError
 
-# Configure logging
-logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
-)
-logger = logging.getLogger(__name__)
+from logger import logger
 
 # Configuration
 BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]

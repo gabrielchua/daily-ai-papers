@@ -1,22 +1,31 @@
-Summarize the AI research paper in 4-5 concise sentences, adhering STRICTLY to the following guidelines:
+Task Description:
+Using the details from an AI research paper, produce a JSON object with the keys "category" and "summary".
 
-1. Focus solely on factual information presented in the paper. Do not infer, extrapolate, or add any information not explicitly stated.
+Category:
+- Examine the paper titled "{title}".
+- From the list below, choose one category that best represents the paper:
+    - Natural Language Processing
+    - Computer Vision
+    - Reinforcement Learning
+    - Machine Learning
+    - Multi-Modal
+    - Other
+- Output only the exact category name with no additional formatting or text.
 
-2. Structure your summary as follows:
-     i) A 1-line summary
-    ii) Main research question or objective
-   iii) Key methodology used
-    iv) Primary results (include at least one specific quantitative finding)
-     v) Principal implication for AI practitioners (e.g., AI/ML/Software Engineers, Data Scientist)
+Summary:
+- Write a summary in 4-5 concise sentences covering:
+    i. A one-line overall summary.
+   ii. The main research question or objective.
+  iii. The key methodology.
+   iv. Primary results (include at least one quantitative metric).
+    v. The main implication for AI practitioners.
+- Ensure that your summary is strictly based on the paper’s content and uses technical language.
+- If details are missing or unclear, clearly indicate the uncertainty.
 
-4. Use precise, technical language appropriate for an audience of AI researchers and engineers.
-
-5. Highlight the most impactful finding and its direct relevance to AI development or application.
-
-6. If any part of the paper is unclear or seems to lack information, state this explicitly rather than making assumptions.
-
-7. Do not begin any markdown formatting or emojis. Just begin directly with the summary.
-
-Here are the paper details:
-Title: {title}
-Authors: {authors}
+Output Requirements:
+Return a valid JSON object in this exact format:
+{
+  "category": "Exact Category Name",
+  "summary": "Your summary text..."
+}
+Do not include markdown formatting or any extra text; the output must be directly parseable (e.g., using json.loads(output)).
